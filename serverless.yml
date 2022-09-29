@@ -1,0 +1,20 @@
+service: goodreads-amazon
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  lambdaHashingVersion: 20201221
+  region: eu-west-2
+  stage: dev
+  logRetentionInDays: 90
+  versionFunctions: false
+
+custom:
+  prefix: goodreads-amazon
+
+functions:
+  goodreads-amazon-cron:
+    handler: ./src/handler.handler
+    name: ${self:custom.prefix}-cron-function
+    description: Script used to search Amazon Kindle book deals for books marked as "Want to read" in Goodreads.
+    reservedConcurrency: 5
