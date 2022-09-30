@@ -15,6 +15,7 @@ custom:
 plugins:
   - serverless-plugin-typescript 
   - serverless-offline
+  - serverless-dotenv-plugin
 
 package:
   exclude:
