@@ -4,8 +4,9 @@
       "target": "ES2017",
       "noImplicitAny": true,
       "preserveConstEnums": true,
-      "outDir": "./built",
-      "sourceMap": true
+      "outDir": "./build",
+      "sourceMap": true,
+      "rootDir": "./"
     },
     "include": ["src/**/*"],
     "exclude": ["node_modules", "**/*.spec.ts"]

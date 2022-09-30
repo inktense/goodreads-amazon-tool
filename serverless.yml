@@ -12,6 +12,16 @@ provider:
 custom:
   prefix: goodreads-amazon
 
+plugins:
+  - serverless-plugin-typescript 
+  - serverless-offline
+
+package:
+  exclude:
+    - node_modules/**/*
+  include:
+    - src/handler.ts
+
 functions:
   goodreads-amazon-cron:
     handler: ./src/handler.handler
