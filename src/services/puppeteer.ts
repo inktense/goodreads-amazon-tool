@@ -29,16 +29,8 @@ export const getToReadShelf = async () => {
     // otherwise we will miss the last books
     await page.waitForTimeout(10000);
 
-    // await sleep_for(page, 1000, 2000)
-    // const books = await page.$x(
-    //   `//div[@class="myBooksPage"]/div[2]/div[2]/table/tbody`
-    // );
-    // let lines: string[] = [];
-
     const titlesArray = await page.evaluate(() => {
-      // const tds = Array.from(document.querySelectorAll(' tr td'))
       const titles = Array.from(document.getElementsByClassName("field title"));
-      // const authors = Array.from(document.getElementsByClassName('field author'))
       return titles.map((title) => title.innerText);
     });
 
@@ -48,11 +40,6 @@ export const getToReadShelf = async () => {
       );
       return authors.map((author) => author.innerText);
     });
-
-    console.table(titlesArray);
-
-    console.table(authorsArray);
-
     
   } catch (error) {
     console.log("Puppeteer error: ", error);
