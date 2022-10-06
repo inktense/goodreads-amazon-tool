@@ -1,15 +1,10 @@
-import puppeteer from "puppeteer";
+import * as puppeteer from "puppeteer";
 
 import { URL } from "../constants/goodreads";
 import { autoScroll } from "../helpers/puppeteer";
+import { Book } from "../constants/types";
 
-type Book = {
-  title: String;
-  author: string;
-};
-//Promise<Book[]>
-
-export const getToReadShelf = async () => {
+export const getToReadShelf = async (): Promise<Book[]> => {
   try {
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -29,18 +24,27 @@ export const getToReadShelf = async () => {
     // otherwise we will miss the last books
     await page.waitForTimeout(10000);
 
-    const titlesArray = await page.evaluate(() => {
+    const titlesArray: string[] = await page.evaluate(() => {
       const titles = Array.from(document.getElementsByClassName("field title"));
-      return titles.map((title) => title.innerText);
+      return titles.map((title) => (title as HTMLElement).innerText);
     });
 
-    const authorsArray = await page.evaluate(() => {
+    const authorsArray: string[] = await page.evaluate(() => {
       const authors = Array.from(
         document.getElementsByClassName("field author")
       );
-      return authors.map((author) => author.innerText);
+      return authors.map((author) => (author as HTMLElement).innerText);
     });
-    
+    console.table(titlesArray);
+
+    const toReadBooksArray = titlesArray.map((element, i) => {
+      return {
+        title: element,
+        author: authorsArray[i],
+      } as Book;
+    });
+
+    return toReadBooksArray;
   } catch (error) {
     console.log("Puppeteer error: ", error);
   }

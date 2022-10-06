@@ -29,3 +29,4 @@ functions:
     name: ${self:custom.prefix}-cron-function
     description: Script used to search Amazon Kindle book deals for books marked as "Want to read" in Goodreads.
     reservedConcurrency: 5
+
