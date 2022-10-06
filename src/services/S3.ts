@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
+import { S3Client, PutObjectCommand, PutObjectCommandInput } from "@aws-sdk/client-s3";
 
 const client = new S3Client({ region: process.env.REGION });
 
@@ -8,7 +8,8 @@ export const getS3Document = async (bucket: string, key: string) => {
     const input = {
       Bucket: bucket,
       Key: key,
-    };
+    } as PutObjectCommandInput;
+    
     const command = new PutObjectCommand(input);
     const data = await client.send(command);
     
