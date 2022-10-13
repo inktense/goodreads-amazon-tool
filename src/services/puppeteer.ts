@@ -1,4 +1,8 @@
-import * as puppeteer from "puppeteer";
+// import * as chromium from "chrome-aws-lambda";
+const chromium = require('@sparticuz/chrome-aws-lambda');
+import * as puppeteer from 'puppeteer-core'
+//const puppeteer = require("puppeteer-core");
+
 
 import { URL } from "../constants/goodreads";
 import { autoScroll } from "../helpers/puppeteer";
@@ -6,7 +10,14 @@ import { Book } from "../constants/types";
 
 export const getToReadShelf = async (): Promise<Book[]> => {
   try {
-    const browser = await puppeteer.launch({ headless: false });
+    // const executablePath = process.env.IS_OFFLINE ? null : 
+    // const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({
+            args: chromium.args,
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath,
+            headless: chromium.headless
+        });
     const page = await browser.newPage();
     await page.setViewport({
       width: 1280,
@@ -37,6 +48,8 @@ export const getToReadShelf = async (): Promise<Book[]> => {
     });
     console.table(titlesArray);
 
+    await browser.close()
+
     const toReadBooksArray = titlesArray.map((element, i) => {
       return {
         title: element,
@@ -45,6 +58,7 @@ export const getToReadShelf = async (): Promise<Book[]> => {
     });
 
     return toReadBooksArray;
+
   } catch (error) {
     console.log("Puppeteer error: ", error);
   }

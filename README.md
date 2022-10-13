@@ -14,4 +14,9 @@ change terminal
 
 aws lambda invoke /local \
   --endpoint-url http://localhost:3002 \
-  --function-name goodreads-amazon-cron-function
+  --function-name goodreads-amazon-shelf-cron-function
+
+
+  Potential error after deploying Lambda function:
+
+  Puppeteer error:  Error: Could not find expected browser (chrome) locally. Run `npm install` to download the correct Chromium revision (1045629).
