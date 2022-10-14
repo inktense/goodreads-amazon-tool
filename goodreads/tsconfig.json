@@ -8,6 +8,6 @@
       "sourceMap": true,
       "rootDir": "./"
     },
-    "include": ["src/**/*", "src/constants"],
+    "include": ["./**/*"],
     "exclude": ["node_modules", "**/*.spec.ts"]
   }
