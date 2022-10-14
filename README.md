@@ -20,3 +20,8 @@ aws lambda invoke /local \
   Potential error after deploying Lambda function:
 
   Puppeteer error:  Error: Could not find expected browser (chrome) locally. Run `npm install` to download the correct Chromium revision (1045629).
+
+
+journey to building a Puppeteer scraper on Lambda.
+
+Approach one quickly fell apart after noticing 

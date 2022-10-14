@@ -22,7 +22,6 @@
     "@types/node": "^18.7.23",
     "@types/puppeteer": "^5.4.6",
     "aws-sdk": "^2.1225.0",
-    "chrome-aws-lambda": "^10.1.0",
     "puppeteer": "^18.2.1",
     "serverless-dotenv-plugin": "^4.0.2",
     "serverless-offline": "^8.3.1",
@@ -32,6 +31,8 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.113.0",
-    "puppeteer-core": "^18.2.1"
+    "chrome-aws-lambda": "^1.20.4",
+    "puppeteer-core": "^13.7.0",
+    "puppeteer-extra-plugin-adblocker": "^2.13.5"
   }
 }

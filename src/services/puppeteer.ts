@@ -1,5 +1,5 @@
 // import * as chromium from "chrome-aws-lambda";
-const chromium = require('@sparticuz/chrome-aws-lambda');
+const chromium = require('chrome-aws-lambda');
 import * as puppeteer from 'puppeteer-core'
 //const puppeteer = require("puppeteer-core");
 
@@ -12,11 +12,12 @@ export const getToReadShelf = async (): Promise<Book[]> => {
   try {
     // const executablePath = process.env.IS_OFFLINE ? null : 
     // const browser = await puppeteer.launch({ headless: false });
-    const browser = await puppeteer.launch({
+    const browser = await chromium.puppeteer.launch({
             args: chromium.args,
             defaultViewport: chromium.defaultViewport,
             executablePath: await chromium.executablePath,
-            headless: chromium.headless
+            headless: chromium.headless,
+            ignoreHTTPSErrors: true,
         });
     const page = await browser.newPage();
     await page.setViewport({

@@ -9,11 +9,11 @@ provider:
   logRetentionInDays: 90
   versionFunctions: false
     # here we put the layers we want to use
-  layers:
-    # Google Chrome for AWS Lambda as a layer
-    # Make sure you use the latest version depending on the region
-    # https://github.com/shelfio/chrome-aws-lambda-layer
-    - arn:aws:lambda:eu-west-2:764866452798:layer:chrome-aws-lambda:31
+  # layers:
+  #   # Google Chrome for AWS Lambda as a layer
+  #   # Make sure you use the latest version depending on the region
+  #   # https://github.com/shelfio/chrome-aws-lambda-layer
+  #   - arn:aws:lambda:eu-west-2:764866452798:layer:chrome-aws-lambda:31
   # function parameters
   memorySize: 2048 # recommended
   timeout: 30
