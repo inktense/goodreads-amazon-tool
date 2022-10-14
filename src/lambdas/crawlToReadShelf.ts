@@ -1,6 +1,7 @@
 import { Handler } from "aws-lambda";
 import { writeFile } from "fs";
 import * as path from "path";
+import * as dotenv from 'dotenv'
 
 import { getToReadShelf } from "../services/puppeteer";
 
