@@ -2,19 +2,18 @@
 const chromium = require("chrome-aws-lambda");
 const AdblockerPlugin = require("puppeteer-extra-plugin-adblocker");
 
-import { addExtra } from "puppeteer-extra";
+const { addExtra } = require("puppeteer-extra");
 //import * as AdblockerPlugin from 'puppeteer-extra-plugin-adblocker'
-import * as puppeteer from "puppeteer-core";
+// import * as puppeteer from "puppeteer-core";
 //const puppeteer = require("puppeteer-core");
 
 import { URL } from "../constants/goodreads";
 import { autoScroll } from "../helpers/puppeteer";
-import { Book } from "../constants/types";
 
 const puppeteerExtra = addExtra(chromium.puppeteer);
 puppeteerExtra.use(AdblockerPlugin());
 
-export const getToReadShelf = async (): Promise<Book[]> => {
+const getToReadShelf = async () => {
   try {
     // const executablePath = process.env.IS_OFFLINE ? null :
     // const browser = await puppeteer.launch({ headless: false });
@@ -42,16 +41,16 @@ export const getToReadShelf = async (): Promise<Book[]> => {
     // otherwise we will miss the last books
     await page.waitForTimeout(10000);
 
-    const titlesArray: string[] = await page.evaluate(() => {
+    const titlesArray = await page.evaluate(() => {
       const titles = Array.from(document.getElementsByClassName("field title"));
-      return titles.map((title) => (title as HTMLElement).innerText);
+      return titles.map((title) => (title).innerText);
     });
 
-    const authorsArray: string[] = await page.evaluate(() => {
+    const authorsArray = await page.evaluate(() => {
       const authors = Array.from(
         document.getElementsByClassName("field author")
       );
-      return authors.map((author) => (author as HTMLElement).innerText);
+      return authors.map((author) => (author).innerText);
     });
     console.table(titlesArray);
 
@@ -61,7 +60,7 @@ export const getToReadShelf = async (): Promise<Book[]> => {
       return {
         title: element,
         author: authorsArray[i],
-      } as Book;
+      };
     });
 
     return toReadBooksArray;
@@ -69,3 +68,5 @@ export const getToReadShelf = async (): Promise<Book[]> => {
     console.log("Puppeteer error: ", error);
   }
 };
+
+module.exports.getToReadShelf = getToReadShelf;

@@ -106,3 +106,7 @@ dist
 src/data/*
 
 build/
+
+.webpack/
+
+output.txt
