@@ -1,7 +1,7 @@
 // Function that scrolls on a pageuntil it reaches the end
-export const autoScroll = async (page): Promise<void>  => {
+const autoScroll = async (page)  => {
     await page.evaluate(async () => {
-      await new Promise<void>((resolve, reject)  => {
+      await new Promise((resolve, reject) => {
         let totalHeight = 0;
         const distance = 100;
         const timer = setInterval(() => {
@@ -17,3 +17,5 @@ export const autoScroll = async (page): Promise<void>  => {
       });
     });
   }
+
+  module.exports.autoScroll = autoScroll;

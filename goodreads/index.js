@@ -5,7 +5,7 @@ require("dotenv").config();
 // import { getToReadShelf } from "./src/services/puppeteer";
 const { getToReadShelf } = require("./src/services/puppeteer");
 
-export const handler = async () => {
+const handler = async () => {
   console.log("Staring Goodreads To read shelf Lambda");
 
   try {

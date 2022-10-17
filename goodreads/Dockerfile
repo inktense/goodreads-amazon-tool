@@ -64,17 +64,35 @@
 # CMD ["index.handler"]
 
 
-FROM amazon/aws-lambda-nodejs:14
+# FROM amazon/aws-lambda-nodejs:14
 
-COPY index.js ./package.json ./package-lock.json ./
+# COPY index.js ./package.json ./package-lock.json ./
 
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+# ARG NODE_ENV=production
+# ENV NODE_ENV=${NODE_ENV}
 
-RUN npm install --only=prod
+# RUN npm install 
+# # RUN node node_modules/puppeteer/install.js
+# # RUN node node_modules/puppeteer-core/install.js
 
-COPY . .
+# COPY . .
 
 # COPY . ${LAMBDA_TASK_ROOT}
 
+# CMD [ "index.handler" ]
+
+FROM public.ecr.aws/lambda/nodejs:14
+
+# ENV AWS_EXECUTION_ENV=AWS_Lambda_nodejs8.10
+
+COPY index.js ./package.json ./package-lock.json ${LAMBDA_TASK_ROOT}
+RUN npm install --omit=dev
+
+RUN node node_modules/puppeteer/install.js
+
+COPY . .
+
+COPY src/*  ${LAMBDA_TASK_ROOT}
+
 CMD [ "index.handler" ]
+

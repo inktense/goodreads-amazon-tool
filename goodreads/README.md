@@ -25,3 +25,6 @@ aws lambda invoke /local \
 journey to building a Puppeteer scraper on Lambda.
 
 Approach one quickly fell apart after noticing 
+
+
+aws ecr get-login-password --profile serverless-admin --region eu-west-2 | docker login --username AWS --password-stdin 635567262396.dkr.ecr.eu-west-2.amazonaws.com
