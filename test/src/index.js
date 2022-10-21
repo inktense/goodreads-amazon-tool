@@ -1,11 +1,11 @@
-import { Handler } from "aws-lambda";
-import { writeFile } from "fs";
-import * as path from "path";
-import * as dotenv from 'dotenv'
+const fs = require("fs")
+const path = require("path")
+require("dotenv").config();
 
-import { getToReadShelf } from "../services/puppeteer";
+// import { getToReadShelf } from "./src/services/puppeteer";
+const { getToReadShelf } = require("./services/puppeteer");
 
-export const handler: Handler = async (): Promise<void> => {
+async function lambdaHandler() {
   console.log("Staring Goodreads To read shelf Lambda");
 
   try {
@@ -25,6 +25,8 @@ export const handler: Handler = async (): Promise<void> => {
 
   } catch (err) {
     console.error(`Error`);
-    throw Error(err as string);
+    throw Error(err);
   }
 };
+
+module.exports = { handler: lambdaHandler };
