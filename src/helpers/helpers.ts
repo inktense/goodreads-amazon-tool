@@ -1,4 +1,6 @@
 const fs = require("fs");
+const path = require("path");
+
 import { Book } from "../constants/types";
 
 export const writeDataToFiles = (data: Book[]) => {
