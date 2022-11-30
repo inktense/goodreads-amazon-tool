@@ -2,6 +2,9 @@ const path = require("path");
 require("dotenv").config();
 const axios = require("axios");
 
+import { sendEmail } from "./services/nodemailer";
+
+
 const { getToReadShelf } = require("./services/puppeteer");
 const { writeDataToFiles } = require("./helpers/helpers");
 const { amazonOptions } = require("./constants/axios");
@@ -57,15 +60,12 @@ const server = async () => {
       }
     });
 
-    console.log("Found ", discountedBooks.length, " discounted books", discountedBooks);
-
     const booksToBuy = discountedBooks.filter((book: any) => {
-      console.log(book.variations[0].value, book.variations.length, typeof book.variations)
        return book.variations[0].value == "Kindle Edition" &&
         book.variations[0].price < 1.00
     
   });
-
+  await sendEmail()
     console.log("Books to buy: ", booksToBuy);
   } catch (error) {
     console.log("Server error: ", error);
