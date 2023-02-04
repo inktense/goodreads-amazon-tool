@@ -1,0 +1,28 @@
+{{!-- email.handlebars --}}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Welcome Email</title>
+</head>
+
+<body>
+    <h2>Hello!</h2>
+
+    {{#if books}}
+    <h3>We found the following books on offer</h3>
+        <ul>
+        {{#each books}}
+        <li><b>{{this.productDescription}}</b> for {{this.variations.price}}. Get it <a href={{this.dpUrl}}>here</a></li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <h3>Sorry, nothing here, better luck next time.</h3>
+    {{/if}}
+    </div>
+
+</body>
+
+</html>

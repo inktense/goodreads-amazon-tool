@@ -11,8 +11,8 @@
   "exec": "ts-node ./src/index.ts",
   "scripts": {
     "start:dev": "nodemon",
-    "build": "rimraf ./build && tsc",
-    "start": "npm run build && node build/index.js",
+    "build": "rimraf ./build && tsc && cpx \"./src/views/**/*\" ./build/views --clean",
+    "start": "npm run build && node build/index.js && cpx \"./src/views/**/*\" ./build/views --clean",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
   "devDependencies": {
     "@types/node": "^18.11.9",
     "@types/puppeteer": "^7.0.4",
+    "cpx": "^1.5.0",
     "nodemon": "^2.0.20",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
@@ -30,6 +31,7 @@
     "axios": "^1.2.0",
     "dotenv": "^16.0.3",
     "nodemailer": "^6.8.0",
+    "nodemailer-express-handlebars": "^5.0.0",
     "puppeteer": "^19.3.0"
   }
 }

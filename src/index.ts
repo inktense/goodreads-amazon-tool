@@ -20,52 +20,60 @@ const server = async () => {
 
     writeDataToFiles(toReadData);
 
-    // const promises = [];
-    // const amazonBooksPerPage = [] as any;
-    // let amazonBooks = [] as any;
+    const promises = [] as any;
+    const amazonBooksPerPage = [] as any;
+    let amazonBooks = [] as any;
 
-    // for (let i = 1; i < 3; i++) {
-    //   amazonOptions.params.page = i;
-    //   promises.push(axios.request(amazonOptions));
-    // }
+    // Basic plan of the API used only allows 2 requests per second so increasing the time
+    for (let i = 1; i < 20; i++) {
+      const delay = 3000 * i;
+      amazonOptions.params.page = i;
+      promises.push(new Promise(async function(resolve){
+        await new Promise(res => setTimeout(res, delay));
 
-    // await Promise.all(promises).then((response): [any] => {
-    //   for (let i = 0; i < response.length; i++) {
-    //     amazonBooks = amazonBooksPerPage.concat(
-    //       response[i].data.searchProductDetails
-    //     );
-    //   }
-    //   return amazonBooks;
-    // });
+        let result = await axios.request(amazonOptions);
+        resolve(result as any);
+      }))
+      promises.push(axios.request(amazonOptions));
+    }
 
-    //console.log(arrayMock)
-    toReadData.push({
-      title: "The Grave Tattoo",
-      author: "author",
-    },
-    {
-      title: "Women with Adult ADHD",
-      author: "author",
+    const a = await Promise.all(promises).then((response): [any] => {
+      for (let i = 0; i < response.length; i++) {
+        amazonBooks = amazonBooksPerPage.concat(
+          response[i].data.searchProductDetails
+        );
+      }
+      return amazonBooks;
     });
+
+    console.log('a => ', a)
+   
     const discountedBooks = [] as any;
 
     toReadData.forEach((book: typeof Book) => {
-      const bookFound = arrayMock.find((element: any) => {
+      const bookFound = a.find((element: any) => {
         //console.log(element.productDescription, book.title);
         return element.productDescription.includes(book.title);
       });
       if (bookFound) {
-        console.log("Found book: ", bookFound);
+        console.log(`Found book: `, bookFound);
         discountedBooks.push(bookFound);
       }
     });
 
+    console.log(`Found a total of ${discountedBooks.length} discounted books`);
+
     const booksToBuy = discountedBooks.filter((book: any) => {
-       return book.variations[0].value == "Kindle Edition" &&
-        book.variations[0].price < 1.00
+      console.log("book", book, book.variations[0])
+       if( book.variations[0].value == "Kindle Edition" &&
+        book.variations[0].price < 1.00) {
+          const newUrl = `https://www.amazon.co.uk${book.dpUrl}`
+          book.dpUrl = newUrl
+          return book
+        }
     
   });
-  await sendEmail()
+  await sendEmail(booksToBuy)
     console.log("Books to buy: ", booksToBuy);
   } catch (error) {
     console.log("Server error: ", error);

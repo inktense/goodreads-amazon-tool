@@ -133,22 +133,6 @@ export const arrayMock = [
     variations: [[Object]],
   },
   {
-    productDescription:
-      "Where We Belong: The heart-breaking new novel from the bestselling Richard and Judy Book Club author",
-    asin: "B07WSGB4JH",
-    countReview: 2002,
-    imgUrl: "https://m.media-amazon.com/images/I/81n14GnHrDL._AC_UY218_.jpg",
-    price: 4.99,
-    retailPrice: 8.99,
-    productRating: "4.2 out of 5 stars",
-    prime: false,
-    dpUrl:
-      "/Where-We-Belong-Anstey-Harris-ebook/dp/B07WSGB4JH/ref=sr_1_25?keywords=kindle+book+deals&qid=1669573566&s=digital-text&sr=1-25",
-    series: null,
-    deliveryMessage: null,
-    variations: [[Object]],
-  },
-  {
     productDescription: "London, SE15: A DC Ruth Hunter Murder Case",
     asin: "B09B7Q4CWS",
     countReview: 3873,
@@ -354,6 +338,31 @@ export const arrayMock = [
         price: 0.0,
         prime: false,
         kindleUnlimited: true,
+      },
+    ],
+  },
+  {
+    productDescription:
+      "Where We Belong: The heart-breaking new novel from the bestselling Richard and Judy Book Club author",
+    asin: "B07WSGB4JH",
+    countReview: 2011,
+    imgUrl: "https://m.media-amazon.com/images/I/81n14GnHrDL._AC_UY218_.jpg",
+    price: 0.99,
+    retailPrice: 8.99,
+    productRating: "4.2 out of 5 stars",
+    prime: false,
+    dpUrl:
+      "/Where-We-Belong-Anstey-Harris-ebook/dp/B07WSGB4JH/ref=sr_1_43?keywords=kindle+book+deals&qid=1669892387&s=digital-text&sr=1-43",
+    series: null,
+    deliveryMessage: null,
+    variations: [
+      {
+        value: "Kindle Edition",
+        dpUrl:
+          "/Where-We-Belong-Anstey-Harris-ebook/dp/B07WSGB4JH/ref=sr_1_43?keywords=kindle+book+deals&qid=1669892387&s=digital-text&sr=1-43",
+        price: 0.99,
+        prime: false,
+        kindleUnlimited: false,
       },
     ],
   },
